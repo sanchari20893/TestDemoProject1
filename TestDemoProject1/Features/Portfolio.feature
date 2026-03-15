@@ -8,3 +8,12 @@ Scenario Outline:  Visit and Verify portfolio
 	Examples:
 	|SITE|
 	|portfolioURL|
+
+Scenario Outline:  Visit and Verify new portfolio
+	Given Driver is initiated for portfolio website
+	When Verify the portfolio page is open for the '<SITE>'
+	Then Verify the new portfolio page content
+
+	Examples:
+	|SITE|
+	|portfolioCardURL|

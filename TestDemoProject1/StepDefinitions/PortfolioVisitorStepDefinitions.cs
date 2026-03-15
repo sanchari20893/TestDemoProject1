@@ -9,18 +9,21 @@ namespace TestDemoProject1.StepDefinitions
     {
         private BrowserInit browserInit;
         private readonly Portfolio portfolio;
+        private readonly NewPortfolio newPortfolio;
 
         public PortfolioVisitorStepDefinitions(BrowserInit browserInit) { 
             this.browserInit = browserInit;
             portfolio = new Portfolio(browserInit.GetDriver());
+            newPortfolio = new NewPortfolio(browserInit.GetDriver());
 
         }
         [Given(@"Driver is initiated for portfolio website")]
         public void GivenDriverIsInitiatedForPortfolioWebsite()
         {
-            try { }
-            catch(Exception e) {
-                Console.WriteLine(e.ToString());
+            // Browser init is handled by Hooks.BeforeScenario()
+            if (browserInit.GetDriver() == null)
+            {
+                throw new Exception("WebDriver was not initialized in BeforeScenario hook.");
             }
         }
 
@@ -37,6 +40,15 @@ namespace TestDemoProject1.StepDefinitions
         {
             portfolio.VerifyName();
             portfolio.VerifySkills();
+        }
+
+        [Then(@"Verify the new portfolio page content")]
+        public void ThenVerifyTheNewPortfolioPageContent()
+        {
+            if (!newPortfolio.VerifyAllSections())
+            {
+                throw new Exception("New portfolio page content validation failed.");
+            }
         }
     }
 }

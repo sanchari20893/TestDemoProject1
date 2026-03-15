@@ -16,7 +16,7 @@ namespace TestDemoProject1.PageObject
         {
             this.driver = driver;
         }
-        public IWebElement Name => driver.FindElement(By.XPath("//*[@id=\"uXnzLPYebxEtkB1v\"]"));
+        public IWebElement Name => driver.FindElement(By.XPath("//*[@text=\"Sanchari Sen\"]"));
         public bool VerifyName() {
             Thread.Sleep(1000);
             Console.WriteLine(Name.Text); 
